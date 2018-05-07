@@ -146,6 +146,9 @@ GLuint Shader::cargarBMP(const char * rutaBMP) {
 
 	//Si llegamos aqui el BMP si es valido :D!
 	posicionData = *(int *)&(cabecera[0x0A]);
+	tamanoImagen = *(int *)&(cabecera[0x22]);
+	ancho = *(int *)&(cabecera[0x12]);
+	alto = *(int *)&(cabecera[0x16]);
 
 	if (tamanoImagen == 0) {
 		tamanoImagen = ancho * alto * 3;

@@ -5,7 +5,7 @@ Modelo::Modelo(){
 	modelo = mat4(1.0f);
 };
 
-void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID, GLuint modeloID, GLuint vistaID, GLuint proyeccionID){
+void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID, GLuint modeloID, GLuint vistaID, GLuint proyeccionID, GLuint uvID, GLuint samplerImagenID, GLuint texturaID){
 
 	this->modeloID = modeloID;
 	this->vistaID = vistaID;
@@ -31,7 +31,17 @@ void Modelo::inicializarVertexArray(GLuint posicionID, GLuint colorID, GLuint mo
 	glVertexAttribPointer(posicionID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertice), 0);
 	glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertice), (void*) sizeof(vec4));
 
-	//soltarlos
+	glGenBuffers(1, &uvBufferID);
+	glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * mapaUV.size(), mapaUV.data(), GL_STATIC_DRAW);
+	glEnableVertexAttribArray(uvID);
+	glVertexAttribPointer(uvID, 2, GL_FLOAT, GL_FALSE, sizeof(vec2), 0);
+	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texturaID);
+	glUniform1i(samplerImagenID, 0);
+
+	//Soltarlos
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

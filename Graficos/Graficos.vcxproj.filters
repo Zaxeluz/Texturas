@@ -69,7 +69,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\OneDrive\Escritorio\smilie.bmp">
+    <Image Include="lml.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
